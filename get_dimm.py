@@ -6,12 +6,14 @@ For few Nodes, yu can always check it manually from IPMI Web gui.
 
 import grequests
 import requests
-import urllib3
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import argparse
 from bs4 import BeautifulSoup
 import time
 import os
 import glob
+
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 class ServerData:
 	def __init__(self):
@@ -89,6 +91,9 @@ def get_dimm_supermicro(ip_addr):
 		
 	return 	myserver
 		
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
+
 fname = 'file_input.txt'  #text file
 fout = 'file_output.csv' #output as csv
 myserver = None	
